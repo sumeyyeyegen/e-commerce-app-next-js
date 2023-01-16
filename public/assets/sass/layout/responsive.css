@@ -1,0 +1,17 @@
+.shopping-summery table tbody tr img {
+  max-width: 80px;
+  margin-right: 15px;
+}
+.shopping-summery .form-check-label {
+  display: none;
+}
+.shopping-summery h6 {
+  font-size: 14px;
+}
+.shopping-summery td.pl-30 {
+  padding-left: 0 !important;
+}
+.shopping-summery button.btn {
+  width: 120px;
+  margin-left: 15px;
+}/*# sourceMappingURL=responsive.css.map */

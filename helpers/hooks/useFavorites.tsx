@@ -1,40 +1,65 @@
 import { useEffect, useState } from 'react';
+import storage from '../localStorage';
 //localS. tanım varsa onu al yoksa bos array tanımla.
 
+const getArr = storage.get("favorites") || [];
+
 const useFavorites: any = () => {
-  const defaultFavorites: any = process.browser && typeof window !== "undefined" && localStorage.getItem('favorites') !== null && localStorage.getItem('favorites') !== undefined && localStorage.getItem('favorites') ? JSON.parse(localStorage.getItem('favorites') || "") : [];
+  const [favorites, setFavorites] = useState<any[]>([])
+  const [allFavorites, setAllFavorites] = useState<any[]>(getArr)
+  const [localStorageData, setLocalStorageData] = useState<any[]>([])
 
-  const [favorites, setFavorites] = useState<any[]>(defaultFavorites)
+  const findProductIndexById = (list: Array<any>, id: number) => {
+    if (list.length > 0) {
+      const index: any = list.findIndex((item) => Number(item.id) === Number(id));
+      return index;
+    } else {
+      return -1
+    }
+  };
 
-  const addToFavoriteList = (data: any, findFavoriteItems: any) => {
+
+  const addToFavoriteList = (data: any) => {
+    console.log(data);
+    setAllFavorites((favs: any) => [...favs, data]);
     //Ürünün sepette olup olmamasını kontrol ediyor
+    let idx: any = findProductIndexById(allFavorites, Number(data.id))
 
-    if (findFavoriteItems === undefined) {
-      return setFavorites([...favorites, data]);
+    if (idx === -1) {
+      setFavorites((favorites: any) => [...favorites, data]);
+      setAllFavorites((favs: any) => [...favs, data]);
     } else {
 
-      const filtered = favorites.filter(
-        (item) => item.id !== findFavoriteItems.id
+      const filtered = allFavorites.filter(
+        (item) => Number(item.id) !== Number(data.id)
       );
 
-      setFavorites([...filtered]);
+      setAllFavorites([...filtered]);
     }
   }
-
 
   const emptyFavorites = () => {
     setFavorites([]);
   };
 
   useEffect(() => {
-    localStorage.setItem("favorites", JSON.stringify(favorites));
-  }, [favorites]);
+    if (favorites.length > 0) {
+      let idx: any = findProductIndexById(allFavorites, Number(favorites[0].id))
 
-  useEffect(() => {
+      if (idx === -1) {
+        let data: any = [];
+        getArr !== undefined && getArr?.length > 0 && getArr.map((item: any) => data.push(item))
+        favorites.length > 0 && data.push(favorites[0]);
 
-    console.log(defaultFavorites);
+        storage.set("favorites", [...data]);
+      } else {
+        storage.set("favorites", [...allFavorites]);
+      }
+    } else {
+      storage.set("favorites", allFavorites);
+    }
+  }, [favorites, allFavorites]);
 
-  }, [defaultFavorites])
   return {
     favorites,
     addToFavoriteList,

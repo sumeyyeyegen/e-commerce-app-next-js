@@ -9,38 +9,14 @@ const CardComponent = ({ item }: any) => {
   const { addToBasket, basketItems } = useBasket();
   const { addToFavoriteList, favorites } = useFavorites();
   const [findFavorite, setFindFavorite] = useState()
-  const [active, setActive] = useState(false)
 
-  const findBasketItems = basketItems.find(
+  const findBasketItems = basketItems.findIndex(
     (item: any) => item.id === item.id
   );
 
-  useEffect(() => {
-    const findFavoriteItems: any = favorites.find(
-      (fav: any) => Number(fav.id) === Number(item.id)
-    );
-    setFindFavorite(findFavoriteItems);
-    setActive(false);
-  }, [])
-
   // useEffect(() => {
-  //   const findFavoriteItems: any = favorites.find(
-  //     (fav: any) => Number(fav.id) === Number(item.id)
-  //   );
-  //   setFindFavorite(findFavoriteItems);
-  //   setActive(false);
-  // }, [favorites])
-
-  // useEffect(() => {
-  //   if (active === true) {
-  //     const findFavoriteItems: any = favorites.find(
-  //       (fav: any) => Number(fav.id) === Number(item.id)
-  //     )
-  //     setFindFavorite(findFavoriteItems);
-  //     setActive(false);
-  //   }
-  // }, [active])
-
+  //   alert(JSON.stringify(favorites))
+  // }, [])
   return (
     <div className='card rounded'>
       <div className='position-relative'>
@@ -51,7 +27,7 @@ const CardComponent = ({ item }: any) => {
           image={item.image}
           alt={`product image ${item.id}`}
         />
-        <IconButton aria-label="add to favorites" className={`favorite-button ${findFavorite !== undefined ? "active" : ""}`} onClick={() => { setActive(true); addToFavoriteList(item, findFavorite) }}>
+        <IconButton aria-label="add to favorites" className={`favorite-button ${findFavorite !== undefined ? "active" : ""}`} onClick={() => addToFavoriteList(item)}>
           <Favorite />
         </IconButton>
       </div>

@@ -226,3 +226,46 @@ a {
 .basket-button {
   color: var(--thema-color-1);
 }
+
+/* -----------------------------Basket Table-------------------------------------- */
+
+table .product-thumbnail img {
+  max-width: 80px;
+}
+
+.table-wishlist {
+  border: 0;
+}
+
+.shopping-summery table> :not(caption)>*>* {
+  padding: 15px 0;
+}
+
+.shopping-summery table td,
+.shopping-summery table th,
+.shopping-summery table thead {
+  border: 0;
+}
+
+.shopping-summery table thead th {
+  background-color: #ececec;
+  padding: 18px 0;
+  font-family: "Quicksand", sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: #253d4e;
+}
+
+.shopping-summery table thead th.start {
+  border-radius: 20px 0 0 20px;
+}
+
+.shopping-summery table thead th.end {
+  border-radius: 0 20px 20px 0;
+}
+
+.shopping-summery table tbody tr img {
+  max-width: 120px;
+  border: 1px solid #ececec;
+  border-radius: 15px;
+}

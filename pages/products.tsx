@@ -57,7 +57,7 @@ const Products = ({ productList }: any) => {
 
       <div className='row'>
         {
-          productList.map((product: any) => {
+          productList.map((product: any,idx:any) => {
             return <div key={product.id} className="col-12 col-md-6 col-lg-3 mb-3">
               <CardComponent item={product} />
             </div>

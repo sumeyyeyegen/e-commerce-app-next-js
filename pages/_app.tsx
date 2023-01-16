@@ -4,6 +4,7 @@ import store from '../redux/store'
 import { Provider } from 'react-redux';
 import Head from 'next/head';
 import Header from '../components/Header';
+import "../public/assets/css/main.css"
 
 export default function App({ Component, pageProps }: AppProps) {
   return <>
