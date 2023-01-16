@@ -1,29 +1,29 @@
 import { useEffect, useState } from 'react';
 import storage from '../localStorage';
 //localS. tanım varsa onu al yoksa bos array tanımla.
-
-const getArr = storage.get("favorites") || [];
-
 const useFavorites: any = () => {
+  const getArr = storage.get("favorites")
   const [favorites, setFavorites] = useState<any[]>([])
-  const [allFavorites, setAllFavorites] = useState<any[]>(getArr)
-  const [localStorageData, setLocalStorageData] = useState<any[]>([])
+  const [allFavorites, setAllFavorites] = useState<any[]>(getArr);
+  const [indx, setIndx] = useState()
 
   const findProductIndexById = (list: Array<any>, id: number) => {
-    if (list.length > 0) {
-      const index: any = list.findIndex((item) => Number(item.id) === Number(id));
-      return index;
-    } else {
-      return -1
-    }
+    // if (list?.length > 0) {
+    const index: any = list.findIndex((item) => Number(item.id) === Number(id));
+    return index;
+    // } else {
+    //   return -1;
+    // }
   };
 
 
   const addToFavoriteList = (data: any) => {
     console.log(data);
-    setAllFavorites((favs: any) => [...favs, data]);
+
     //Ürünün sepette olup olmamasını kontrol ediyor
-    let idx: any = findProductIndexById(allFavorites, Number(data.id))
+    let idx: any = findProductIndexById(getArr, Number(data.id))
+    console.log(idx);
+    setIndx(JSON.parse(JSON.stringify(idx)));
 
     if (idx === -1) {
       setFavorites((favorites: any) => [...favorites, data]);
@@ -38,27 +38,28 @@ const useFavorites: any = () => {
     }
   }
 
+
   const emptyFavorites = () => {
     setFavorites([]);
   };
 
   useEffect(() => {
-    if (favorites.length > 0) {
-      let idx: any = findProductIndexById(allFavorites, Number(favorites[0].id))
 
-      if (idx === -1) {
-        let data: any = [];
-        getArr !== undefined && getArr?.length > 0 && getArr.map((item: any) => data.push(item))
-        favorites.length > 0 && data.push(favorites[0]);
+    let data: any = [];
+    if (indx === -1) {
+      getArr !== undefined && getArr?.length > 0 && getArr.map((item: any) => data.push(item))
+      favorites.length > 0 && data.push(favorites[0]);
 
-        storage.set("favorites", [...data]);
-      } else {
-        storage.set("favorites", [...allFavorites]);
-      }
-    } else {
-      storage.set("favorites", allFavorites);
+      storage.set("favorites", [...data]);
     }
-  }, [favorites, allFavorites]);
+  }, [favorites]);
+
+  useEffect(() => {
+    if (indx !== -1) {
+      storage.set("favorites", [...allFavorites]);
+    }
+
+  }, [allFavorites]);
 
   return {
     favorites,
