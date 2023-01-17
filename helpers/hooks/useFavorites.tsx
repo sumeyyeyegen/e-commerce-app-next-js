@@ -43,20 +43,28 @@ const useFavorites: any = () => {
     setFavorites([]);
   };
 
-  useEffect(() => {
+  // useEffect(() => {
 
+  //   let data: any = [];
+  //   if (indx === -1) {
+  //     getArr !== undefined && getArr?.length > 0 && getArr.map((item: any) => data.push(item))
+  //     favorites.length > 0 && data.push(favorites[0]);
+
+  //     storage.set("favorites", [...data]);
+  //   }
+  // }, [favorites]);
+
+  useEffect(() => {
     let data: any = [];
     if (indx === -1) {
       getArr !== undefined && getArr?.length > 0 && getArr.map((item: any) => data.push(item))
       favorites.length > 0 && data.push(favorites[0]);
 
       storage.set("favorites", [...data]);
-    }
-  }, [favorites]);
-
-  useEffect(() => {
-    if (indx !== -1) {
-      storage.set("favorites", [...allFavorites]);
+    } else {
+      if (allFavorites?.length > 0) {
+        storage.set("favorites", [...allFavorites]);
+      }
     }
 
   }, [allFavorites]);

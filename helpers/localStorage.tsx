@@ -9,7 +9,7 @@ class storage {
     if (process.browser && typeof window !== "undefined" && localStorage.getItem(key) !== null && localStorage.getItem(key) !== undefined && localStorage.getItem(key)) {
       var nextData: any = localStorage.getItem(key);
 
-      return JSON.parse(nextData)
+      return JSON.parse(nextData) || []
     }
   }
 }
