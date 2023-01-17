@@ -5,8 +5,10 @@ import { Provider } from 'react-redux';
 import Head from 'next/head';
 import Header from '../components/Header';
 import "../public/assets/css/main.css"
+import { SessionProvider } from 'next-auth/react'
+import { FC } from 'react';
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps }: any) {
   return <>
     <Head>
       <title>Otobüs Uygulaması</title>
@@ -14,9 +16,11 @@ export default function App({ Component, pageProps }: AppProps) {
     </Head>
     <Header />
     <div className="container">
-      <Provider store={store}>
-        <Component {...pageProps} />
-      </Provider>
+      <SessionProvider session={pageProps.session}>
+        <Provider store={store}>
+          <Component {...pageProps} />
+        </Provider>
+      </SessionProvider>
     </div>
   </>
 }
