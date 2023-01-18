@@ -1,16 +1,15 @@
 :root {
   --secondary: #e5e5e5;
-  --thema-color-1: #43368C;
+  --thema-color-1: #43368c;
   --thema-text-color: #ffd300;
   --danger: #db471e;
   --warning: #ffd300;
-  --success: #43368C;
+  --success: #43368c;
   --primary: #5d3ebc;
   --light: #f3f0fe;
   --gray: #a2a2a2;
   --info: #4eb5eb;
   --border-color-primary: var(--success);
-
 }
 
 html,
@@ -37,7 +36,6 @@ a {
 
   body {
     color: white;
-    background: black;
   }
 }
 
@@ -108,7 +106,7 @@ a {
 
 #header .menu div {
   position: relative;
-  transition: .2s;
+  transition: 0.2s;
   font-size: 1.15em;
   font-weight: 500;
   color: var(--thema-text-color);
@@ -140,7 +138,7 @@ a {
   border-bottom: 1px solid var(--border-color-primary);
 }
 
-#header div .container>* {
+#header div .container > * {
   flex: 1;
 }
 
@@ -180,7 +178,6 @@ a {
 @media screen and (max-width: 768px) {
   .nav__menu-bar {
     padding: 2.1em 2.1em;
-    ;
   }
 
   .icon {
@@ -237,7 +234,7 @@ table .product-thumbnail img {
   border: 0;
 }
 
-.shopping-summery table> :not(caption)>*>* {
+.shopping-summery table > :not(caption) > * > * {
   padding: 15px 0;
 }
 
