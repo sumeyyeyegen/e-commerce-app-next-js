@@ -16,7 +16,6 @@ export default function Home() {
         session ? (<h3>You are signed in</h3>) : (
           <>
             <h3>You are not signed in</h3>
-            <button onClick={() => signIn()}>Sign In</button>
           </>
         )
       }
